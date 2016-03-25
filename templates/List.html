@@ -1,0 +1,141 @@
+<div ng-cloak>
+  <md-card id="popupContainer">
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="md-avatar-icon">
+          <i class="material-icons">supervisor_account</i>
+        </md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="mdi-title">ทะเบียนผู้ป่วย</span>
+        <span class="md-subhead">ทะเบียนเบาหวาน, ความดันโลหิตสูง</span>
+      </md-card-header-text>
+    </md-card-header>
+
+    <md-card-content>
+      <md-content>
+        <md-progress-linear md-mode="indeterminate" ng-show="showProgress"></md-progress-linear>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="ทะเบียนผู้ป่วยเบาหวาน" ng-click="getDmList()">
+            <md-content>
+              <div layout="row">
+                <div flex>
+                  <md-input-container md-no-float class="md-block">
+                    <md-icon class="material-icons">search</md-icon>
+                    <input ng-model="queryDm" type="text" placeholder="ชื่อผู้ป่วย">
+                  </md-input-container>
+                </div>
+                <div flex>
+                  <md-button class="md-raised md-primary" ng-click="doSearchDm()">SEARCH</md-button>
+                  <md-button class="md-raised" ng-click="refreshDm()">REFRESH</md-button>
+                </div>
+              </div>
+              <md-table-container>
+                <table md-table>
+                  <thead md-head>
+                    <tr md-row>
+                      <th md-column>HN</th>
+                      <th md-column>ชื่อ-สกุล</th>
+                      <th md-column>วันเกิด</th>
+                      <th md-column>อายุ</th>
+                      <th md-column>ปีที่เป็น</th>
+                      <th md-column>สิทธิการรักษา</th>
+                      <th md-column></th>
+                      <!--<th md-column><span>การปฏิบัติตัว</span></th>-->
+                    </tr>
+                  </thead>
+                  <tbody md-body>
+                    <tr md-row ng-if="!patientDm.length">
+                      <td md-cell colspan="7">ไม่พบรายการ</td>
+                    </tr>
+                    <tr md-row ng-if="patientDm.length" ng-repeat="p in patientDm">
+                      <td md-cell>{{ p.patient_hn }}</td>
+                      <td md-cell>{{ p.fullname }}</td>
+                      <td md-cell>{{ p.birthdate | toThaiDate }}</td>
+                      <td md-cell>{{ p.age }}</td>
+                      <td md-cell>{{ p.begin_year }}</td>
+                      <td md-cell>{{ p.pttype_name }}</td>
+                      <td md-cell>
+                        <md-button class="md-icon-button" aria-label="View" ng-click="showDetail(p.patient_hn, 1)">
+                          <md-icon>
+                            <i class="material-icons">visibility</i>
+                          </md-icon>
+                          <md-tooltip md-direction="top">
+                            ดูข้อมูลรับบริการ
+                          </md-tooltip>
+                        </md-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </md-table-container>
+              <md-table-pagination ng-show="!isSearching" md-limit="dmQuery.limit" md-page="dmQuery.page"
+                md-total="{{patientDmTotal}}" md-on-paginate="onDmPaginate" md-page-select>
+              </md-table-pagination>
+            </md-content>
+          </md-tab>
+          <md-tab label="ทะเบียนผู้ป่วยความดันโลหิต" ng-click="getHtList()">
+            <md-content>
+              <div layout="row">
+                <div flex>
+                  <md-input-container md-no-float class="md-block">
+                    <md-icon class="material-icons">search</md-icon>
+                    <input ng-model="queryHt" type="text" placeholder="ชื่อผู้ป่วย">
+                  </md-input-container>
+                </div>
+                <div flex>
+                  <md-button class="md-raised md-primary" ng-click="doSearchHt()">SEARCH</md-button>
+                  <md-button class="md-raised" ng-click="refreshHt()">REFRESH</md-button>
+                </div>
+              </div>
+              <md-table-container>
+                <table md-table>
+                  <thead md-head>
+                    <tr md-row>
+                      <th md-column>HN</th>
+                      <th md-column>ชื่อ-สกุล</th>
+                      <th md-column>วันเกิด</th>
+                      <th md-column>อายุ</th>
+                      <th md-column>ปีที่เป็น</th>
+                      <th md-column>สิทธิการรักษา</th>
+                      <th md-column></th>
+                      <!--<th md-column><span>การปฏิบัติตัว</span></th>-->
+                    </tr>
+                  </thead>
+                  <tbody md-body>
+                    <tr md-row ng-if="!patientHt.length">
+                      <td md-cell colspan="7">ไม่พบรายการ</td>
+                    </tr>
+                    <tr md-row ng-if="patientHt.length" ng-repeat="p in patientHt">
+                      <td md-cell>{{ p.patient_hn }}</td>
+                      <td md-cell>{{ p.fullname }}</td>
+                      <td md-cell>{{ p.birthdate | toThaiDate }}</td>
+                      <td md-cell>{{ p.age }}</td>
+                      <td md-cell>{{ p.begin_year }}</td>
+                      <td md-cell>{{ p.pttype_name }}</td>
+                      <td md-cell>
+                        <md-button class="md-icon-button" aria-label="View" ng-click="showDetail(p.patient_hn, 0)">
+                          <md-icon>
+                            <i class="material-icons">visibility</i>
+                          </md-icon>
+                          <md-tooltip md-direction="top">
+                            ดูข้อมูลรับบริการ
+                          </md-tooltip>
+                        </md-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </md-table-container>
+              <md-table-pagination ng-show="!isSearchingHt" md-limit="htQuery.limit" md-page="htQuery.page"
+                md-total="{{patientHtTotal}}" md-on-paginate="onHtPaginate" md-page-select>
+              </md-table-pagination>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-content>
+    </md-card-content>
+
+  </md-card>
+
+</div>

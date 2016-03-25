@@ -1,13 +1,118 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
+<html ng-app="app">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ระบบจัดการข้อมูลผู้ป่วยโรคเรื้อรัง (v1.0.1)</title>
+  <link rel="stylesheet" href="./node_modules/angular-material/angular-material.css">
+  <link rel="stylesheet" href="./libs/iconfont/material-icons.css">
+    <link rel="stylesheet" href="./node_modules/angular-material-data-table/dist/md-data-table.css">
+  <link rel="stylesheet" href="./app/css/style.css">
+  <!-- application scripts -->
+
+  <script src="./app/index.js"></script>
+
+  <script src="./node_modules/highcharts-ng/dist/highcharts-ng.js"></script>
+
+  <script src="./app/modules/filters/Filters.js"></script>
+  <script src="./app/modules/services/Config.js"></script>
+  <script src="./app/modules/services/Calculator.js"></script>
+
+  <script src="./app/modules/controllers/Connection.js"></script>
+  <script src="./app/modules/controllers/Main.js"></script>
+  <script src="./app/modules/services/Main.js"></script>
+  <script src="./app/modules/controllers/List.js"></script>
+  <script src="./app/modules/services/List.js"></script>
+
+  <script src="./app/modules/controllers/Detail.js"></script>
+  <script src="./app/modules/services/Detail.js"></script>
+
+  <script src="./app/modules/controllers/Export.js"></script>
+  <script src="./app/modules/services/Export.js"></script>
+
+  <script src="./app/modules/controllers/Report.js"></script>
+  <script src="./app/modules/services/Report.js"></script>
+
+  <script src="./app/modules/controllers/StateView.js"></script>
+  <script src="./app/modules/services/StateView.js"></script>
+
+  <script src="./app/modules/controllers/Login.js"></script>
+  <script src="./app/modules/services/Login.js"></script>
+
+</head>
+
+<body>
+
+  <md-toolbar ng-controller="NavCtrl">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()">
+        <md-icon class="material-icons">menu</md-icon>
+      </md-button>
+      <h2>
+              <span>ระบบจัดการข้อมูลผู้ป่วยโรคเรื้อรัง</span>
+            </h2>
+      <span flex></span>
+      {{ hospitalName }}
+    </div>
+  </md-toolbar>
+
+  <div ng-controller="AppCtrl" layout="column" style="height:500px;" ng-cloak>
+    <section layout="row" flex>
+      <md-sidenav style="min-height: 680px;" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-theme-indigo">
+          <h1 class="md-toolbar-tools">MAIN MENU</h1>
+        </md-toolbar>
+        <md-content>
+          <md-menu-content>
+          <md-menu-item>
+            <md-button ng-click="go('main')">
+              <md-icon md-menu-align-target>
+                <i class="material-icons">home</i>
+              </md-icon>
+              หน้าหลัก
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="go('list')">
+              <md-icon md-menu-align-target>
+                <i class="material-icons">supervisor_account</i>
+              </md-icon>
+              ทะเบียนผู้ป่วยเรื้อรัง
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="go('report')">
+              <md-icon md-menu-align-target>
+                <i class="material-icons">print</i>
+              </md-icon>
+              ระบบรายงาน
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="go('export')">
+              <md-icon md-menu-align-target>
+                <i class="material-icons">send</i>
+              </md-icon>
+              ส่งออกข้อมูล
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="go('connection')">
+              <md-icon md-menu-align-target>
+                <i class="material-icons">settings</i>
+              </md-icon>
+              ตั้งค่าการเชื่อมต่อ
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+        </md-content>
+      </md-sidenav>
+      <div flex>
+        <ui-view></ui-view>
+      </div>
+    </section>
+  </div>
+
+</body>
+
 </html>

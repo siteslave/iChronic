@@ -1,0 +1,107 @@
+<md-card>
+  <md-card-header>
+    <md-card-avatar>
+      <md-icon class="md-avatar-icon">
+        <i class="material-icons">send</i>
+      </md-icon>
+    </md-card-avatar>
+    <md-card-header-text>
+      <span class="mdi-title">Export data set</span>
+      <span class="md-subhead">ส่งออกข้อมูล</span>
+    </md-card-header-text>
+  </md-card-header>
+  <md-card-content>
+    <md-progress-linear md-mode="indeterminate" ng-show="showProgress"></md-progress-linear>
+    <div layout="row">
+      <div flex="90">
+        <md-input-container class="md-block">
+          <md-icon class="material-icons">folder</md-icon>
+          <input ng-model="folder" type="text" placeholder="ที่เก็บไฟล์" ng-disabled="true">
+        </md-input-container>
+      </div>
+      <div flex>
+        <md-button class="md-icon-button" aria-label="Browse" ng-click="openFolder()">
+          <md-icon class="material-icons">folder</md-icon>
+        </md-button>
+      </div>
+    </div>
+    <div layout="row">
+      <div flex="30">
+        ตั้งแต่
+        <md-datepicker ng-model="startDate" md-placeholder="Enter date"></md-datepicker>
+      </div>
+      <div flex="25">
+        ถึง
+        <md-datepicker ng-model="endDate" md-placeholder="Enter date"></md-datepicker>
+      </div>
+      <md-button class="md-raised md-primary" ng-click="doExport()">ส่งออกข้อมูล</md-button>
+    </div>
+  </md-card-content>
+</md-card>
+
+<div layout="row">
+  <div flex>
+    <md-card>
+      <md-card-content>
+        <md-table-container>
+          <table md-table>
+            <thead md-head>
+              <tr md-row>
+                <th md-column>NAME</th>
+                <th md-column>RECORD(s)</th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row>
+                <td md-cell>CHRONIC.txt</td>
+                <td md-cell>{{ totalChronic }}</td>
+              </tr>
+              <tr md-row>
+                <td md-cell>VILLAGE.txt</td>
+                <td md-cell>{{ totalVillage }}</td>
+              </tr>
+              <tr md-row>
+                <td md-cell>DIAG.txt</td>
+                <td md-cell>{{ totalDiag }}</td>
+              </tr>
+              <tr md-row>
+                <td md-cell>SCREEN.txt</td>
+                <td md-cell>{{ totalScreen }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+      </md-card-content>
+    </md-card>
+  </div>
+
+  <div flex>
+    <md-card>
+      <md-card-content>
+        <md-table-container>
+          <table md-table>
+            <thead md-head>
+              <tr md-row>
+                <th md-column>NAME</th>
+                <th md-column>UPLOAD</th>
+              </tr>
+            </thead>
+            <tbody md-body>
+              <tr md-row ng-if="!exportedFiles.length">
+                <td md-cell colspan="2">ไม่พบไฟล์ที่ต้องการส่ง</td>
+              </tr>
+              <tr md-row ng-if="exportedFiles.length" ng-repeat="f in exportedFiles">
+                <td md-cell>{{ f.name }}</td>
+                <td md-cell>
+                  <md-button class="md-icon-button" aria-label="Upload" ng-click="doUpload(f.path, $index)">
+                    <md-icon class="material-icons">cloud_upload</md-icon>
+                  </md-button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </md-table-container>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<md-card>
+  <md-card-header>
+    <md-card-avatar>
+      <md-icon class="md-avatar-icon">
+        <i class="material-icons">account_circle</i>
+      </md-icon>
+    </md-card-avatar>
+    <md-card-header-text>
+      <span class="mdi-title">Login</span>
+      <span class="md-subhead">Enter username and password for login</span>
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-content>
+    <form action="">
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Username</label>
+          <input ng-model="username" type="text">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Password</label>
+          <input ng-model="password" type="password">
+        </md-input-container>
+      </div>
+      <md-button class="md-primary md-raised" ng-click="doLogin()">Login</md-button>
+    </form>
+  </md-card-content>
+</md-card>

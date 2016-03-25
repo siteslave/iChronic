@@ -1,0 +1,97 @@
+<div ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Back" ng-click="go('report')">
+        <md-icon class="material-icons">arrow_back</md-icon>
+      </md-button>
+      <h2>Back</h2>
+    </div>
+  </md-toolbar>
+
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon class="md-avatar-icon">
+          <i class="material-icons">supervisor_account</i>
+        </md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="mdi-title">รายชื่อผู้ป่วย</span>
+        <span class="md-subhead">แสดงรายชื่อผู้ป่วยตามเงื่อนไขที่กำหนด</span>
+      </md-card-header-text>
+    </md-card-header>
+
+    <md-card-content>
+      <md-progress-linear md-mode="indeterminate" ng-show="showProgress"></md-progress-linear>
+      <md-table-container>
+        <table md-table ng-if="type == 'ckd'">
+          <thead md-head>
+          <tr md-row>
+            <th md-column>#</th>
+            <th md-column>หมู่บ้าน</th>
+            <th md-column>HN</th>
+            <th md-column>ชื่อ-สกุล</th>
+            <th md-column>อายุ</th>
+            <th md-column>วันที่</th>
+            <th md-column>CRETININE</th>
+            <th md-column>STATE</th>
+          </tr>
+          </thead>
+          <tbody md-body>
+          <tr md-row ng-if="!patientCkd.length">
+            <td md-cell colspan="8">ไม่พบรายการ</td>
+          </tr>
+          <tr md-row ng-if="patientCkd.length" ng-repeat="p in patientCkd">
+            <td md-cell>{{ $index+1 }}</td>
+            <td md-cell>หมู่ {{ p.village_moo }} - {{ p.village_name }}</td>
+            <td md-cell>{{ p.hn }}</td>
+            <td md-cell>{{ p.pname }}{{ p.fname }} {{ p.lname }}</td>
+            <td md-cell>{{ p.age }}</td>
+            <td md-cell>{{ p.vstdate | toThaiDate }}</td>
+            <td md-cell>{{ p.creatinine }}</td>
+            <td md-cell>{{ p.state }}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <table md-table ng-if="type == 'cvd'">
+          <thead md-head>
+          <tr md-row>
+            <th md-column>#</th>
+            <th md-column>หมู่บ้าน</th>
+            <th md-column>HN</th>
+            <th md-column>ชื่อ-สกุล</th>
+            <th md-column>วันที่</th>
+            <th md-column>SBP</th>
+            <th md-column>SMOKE</th>
+            <th md-column>LDL</th>
+            <th md-column>HDL</th>
+            <th md-column>TC</th>
+            <th md-column>risk</th>
+          </tr>
+          </thead>
+          <tbody md-body>
+          <tr md-row ng-if="!patientCvd.length">
+            <td md-cell colspan="12">ไม่พบรายการ</td>
+          </tr>
+          <tr md-row ng-if="patientCvd.length" ng-repeat="p in patientCvd">
+            <td md-cell>{{ $index+1 }}</td>
+            <td md-cell>หมู่ {{ p.village_moo }} - {{ p.village_name }}</td>
+            <td md-cell>{{ p.hn }}</td>
+            <td md-cell>{{ p.pname }}{{ p.fname }} {{ p.lname }}</td>
+            <td md-cell>{{ p.vstdate | toThaiDate }}</td>
+            <td md-cell>{{ p.sbp }}</td>
+            <td md-cell>{{ p.smoke }}</td>
+            <td md-cell>{{ p.ldl }}</td>
+            <td md-cell>{{ p.hdl }}</td>
+            <td md-cell>{{ p.tc }}</td>
+            <td md-cell>{{ p.risk }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </md-card-content>
+
+  </md-card>
+
+</div>

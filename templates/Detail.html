@@ -1,0 +1,172 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Back" ng-click="go('list')">
+      <md-icon class="material-icons">arrow_back</md-icon>
+    </md-button>
+    <h2>{{ person.fullname }}  HN: {{ person.patient_hn }} อายุ {{ person.age | number }} ปี</h2>
+  </div>
+</md-toolbar>
+<md-card>
+  <div layout="row" layout-xs="column" layout-padding>
+    <div flex="50">
+      <highchart id="chartCvd" config="chartConfigCvd"></highchart>
+    </div>
+    <div flex="50">
+      <highchart id="chartCkd" config="chartConfigCkd"></highchart>
+    </div>
+  </div>
+</md-card>
+<div layout="row" layout-xs="column">
+  <div flex>
+    <md-card>
+      <md-card-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="ประวัติผลคัดกรอง CVD">
+            <md-content>
+              <md-table-container>
+                <table md-table>
+                  <thead md-head>
+                    <tr md-row>
+                      <th md-column>วันที่</th>
+                      <th md-column>เวลา</th>
+                      <th md-column>สูบบุหรี่</th>
+                      <th md-column>SBP</th>
+                      <th md-column>Cholesterol</th>
+                      <th md-column>LDL</th>
+                      <th md-column>HDL</th>
+                      <th md-column>Score</th>
+                      <th md-column>Risk</th>
+                    </tr>
+                  </thead>
+                  <tbody md-body>
+                    <tr md-row ng-if="!cvdHistory.length">
+                      <td md-cell colspan="8">ไม่พบรายการ</td>
+                    </tr>
+                    <tr md-row ng-if="cvdHistory.length" ng-repeat="c in cvdHistory">
+                      <td md-cell>{{ c.vstdate | toThaiDate }}</td>
+                      <td md-cell>{{ c.vsttime }}</td>
+                      <td md-cell>{{ c.smoke }}</td>
+                      <td md-cell>{{ c.bps }}</td>
+                      <td md-cell>{{ c.tc }}</td>
+                      <td md-cell>{{ c.ldl }}</td>
+                      <td md-cell>{{ c.hdl }}</td>
+                      <td md-cell>{{ c.score | number: 2 }}</td>
+                      <td md-cell>{{ c.state }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </md-table-container>
+            </md-content>
+          </md-tab>
+          <md-tab label="ประวัติผลคัดกรอง CKD">
+            <md-content>
+              <md-table-container>
+                <table md-table>
+                  <thead md-head>
+                    <tr md-row>
+                      <th md-column>วันที่</th>
+                      <th md-column>เวลา</th>
+                      <th md-column>Creatinine</th>
+                      <th md-column>eGFR</th>
+                      <th md-column>State</th>
+                    </tr>
+                  </thead>
+                  <tbody md-body>
+                    <tr md-row ng-if="!ckdHistory.length">
+                      <td md-cell colspan="4">ไม่พบรายการ</td>
+                    </tr>
+                    <tr md-row ng-if="ckdHistory.length" ng-repeat="c in ckdHistory">
+                      <td md-cell>{{ c.vstdate | toThaiDate }}</td>
+                      <td md-cell>{{ c.vsttime }}</td>
+                      <td md-cell>{{ c.creatinine }}</td>
+                      <td md-cell>{{ c.egfr | number: 2}}</td>
+                      <td md-cell>{{ c.state }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </md-table-container>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
+
+<div layout="row" layout-xs="column">
+  <div flex>
+    <md-card>
+      <md-card-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="ประวัติตรวจ LAB">
+            <md-content>
+              <md-table-container>
+                <table md-table>
+                  <thead md-head>
+                  <tr md-row>
+                    <th md-column>วันที่</th>
+                    <th md-column>เวลา</th>
+                    <th md-column>สูบบุหรี่</th>
+                    <th md-column>SBP</th>
+                    <th md-column>Cholesterol</th>
+                    <th md-column>LDL</th>
+                    <th md-column>HDL</th>
+                    <th md-column>Score</th>
+                    <th md-column>Risk</th>
+                  </tr>
+                  </thead>
+                  <tbody md-body>
+                  <!--<tr md-row ng-if="!cvdHistory.length">-->
+                    <!--<td md-cell colspan="8">ไม่พบรายการ</td>-->
+                  <!--</tr>-->
+                  <!--<tr md-row ng-if="cvdHistory.length" ng-repeat="c in cvdHistory">-->
+                    <!--<td md-cell>{{ c.vstdate | toThaiDate }}</td>-->
+                    <!--<td md-cell>{{ c.vsttime }}</td>-->
+                    <!--<td md-cell>{{ c.smoke }}</td>-->
+                    <!--<td md-cell>{{ c.bps }}</td>-->
+                    <!--<td md-cell>{{ c.tc }}</td>-->
+                    <!--<td md-cell>{{ c.ldl }}</td>-->
+                    <!--<td md-cell>{{ c.hdl }}</td>-->
+                    <!--<td md-cell>{{ c.score | number: 2 }}</td>-->
+                    <!--<td md-cell>{{ c.state }}</td>-->
+                  <!--</tr>-->
+                  </tbody>
+                </table>
+              </md-table-container>
+            </md-content>
+          </md-tab>
+          <md-tab label="ประวัติการรับยา">
+            <md-content>
+              <md-table-container>
+                <table md-table>
+                  <thead md-head>
+                  <tr md-row>
+                    <th md-column>วันที่</th>
+                    <th md-column>เวลา</th>
+                    <th md-column>Creatinine</th>
+                    <th md-column>eGFR</th>
+                    <th md-column>State</th>
+                  </tr>
+                  </thead>
+                  <tbody md-body>
+                  <!--<tr md-row ng-if="!ckdHistory.length">-->
+                    <!--<td md-cell colspan="4">ไม่พบรายการ</td>-->
+                  <!--</tr>-->
+                  <!--<tr md-row ng-if="ckdHistory.length" ng-repeat="c in ckdHistory">-->
+                    <!--<td md-cell>{{ c.vstdate | toThaiDate }}</td>-->
+                    <!--<td md-cell>{{ c.vsttime }}</td>-->
+                    <!--<td md-cell>{{ c.creatinine }}</td>-->
+                    <!--<td md-cell>{{ c.egfr | number: 2}}</td>-->
+                    <!--<td md-cell>{{ c.state }}</td>-->
+                  <!--</tr>-->
+                  </tbody>
+                </table>
+              </md-table-container>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
+

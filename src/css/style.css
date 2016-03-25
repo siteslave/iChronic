@@ -1,0 +1,12 @@
+html, body {
+  background-color: #e9eaed;
+  height: 100%;
+  -webkit-app-region: drag;
+}
+.bg-grey {
+  background-color: #e9eaed;
+  height: 100%;
+}
+
+.md-datepicker-button {
+  width: 80px; }

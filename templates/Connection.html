@@ -1,0 +1,56 @@
+<md-card>
+  <md-card-header>
+    <md-card-avatar>
+      <md-icon class="md-avatar-icon">
+        <i class="material-icons">settings</i>
+      </md-icon>
+    </md-card-avatar>
+    <md-card-header-text>
+      <span class="mdi-title">Settings</span>
+      <span class="md-subhead">กำหนดค่าการใช้งานโปรแกรม</span>
+    </md-card-header-text>
+  </md-card-header>
+
+  <md-card-content id="popupContainer">
+    <form name="frmConnection">
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>HOST</label>
+          <input ng-model="config.hosxp.host" type="text" ng-required="true">
+        </md-input-container>
+        <md-input-container>
+          <label>Port</label>
+          <input ng-model="config.hosxp.port" type="number" ng-required="true">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Database</label>
+          <input ng-model="config.hosxp.database" type="text" ng-required="true">
+        </md-input-container>
+      </div>
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Username</label>
+          <input ng-model="config.hosxp.user" type="text" ng-required="true">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Password</label>
+          <input ng-model="config.hosxp.password" type="password" ng-required="true">
+        </md-input-container>
+      </div>
+
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Server URL</label>
+          <input ng-model="config.url" type="text" ng-required="true">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Key</label>
+          <input ng-model="config.key" type="text" ng-required="true">
+        </md-input-container>
+      </div>
+
+
+      <md-button class="md-primary md-raised" ng-disabled="frmConnection.$invalid" ng-click="save()">Save</md-button>
+    </form>
+  </md-card-content>
+</md-card>
